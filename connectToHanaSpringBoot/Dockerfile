@@ -5,4 +5,4 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 
 #mvn clean package
 #docker build -t connect-to-hana .
-#docker run -d -p 2121:2121 connect-to-hana
+#docker run -d -p 8080:8080 connect-to-hana
