@@ -15,7 +15,12 @@ public class ConnectApplication {
 
 		//faz um select de todos os usuários
 
-		var users = queries.getAllUsers();
+		List<User> users = null;
+		try {
+			users = queries.getAllUsers();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		// escreve o resultado no terminal
 		System.out.println("SELECT");
@@ -38,20 +43,33 @@ public class ConnectApplication {
 		}
 
 		//insere o user no HANA
-		queries.insert(userToInsert);
+		try {
+			queries.insert(userToInsert);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		//mostra resultados
-		System.out.println("POST");
+		System.out.println("INSERT");
 		printResult(queries.getAllUsers());
 
-		userToInsert.setName("nome não aleatório");
+		userToInsert.setName("nome nao aleatorio");
 
-		queries.update(userToInsert);
+		try {
+			queries.update(userToInsert);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		System.out.println("UPDATE");
 		printResult(queries.getAllUsers());
 
-		queries.delete(userToInsert.getId());
+		try {
+			queries.delete(userToInsert.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
 
 		System.out.println("DELETE");
 		printResult(queries.getAllUsers());
