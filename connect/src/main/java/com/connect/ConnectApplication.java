@@ -22,7 +22,11 @@ public class ConnectApplication {
 		printResult(users);
 
 		//pega o ID do ultimo User da lista
-		int ultimoId = users.get(users.size() -1).getId();
+		int ultimoId = 0;
+		if (!users.isEmpty()){
+			ultimoId = users.get(users.size() -1).getId();
+		}
+
 
 		User userToInsert = null;
 
