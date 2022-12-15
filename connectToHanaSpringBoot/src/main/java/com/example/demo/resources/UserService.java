@@ -25,9 +25,9 @@ public class UserService {
     }
 
     /**
-     *
+     * insere um usuário
      * @param user
-     * @return
+     * @return response
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity insert(@RequestBody User user){
@@ -35,12 +35,22 @@ public class UserService {
        return ResponseEntity.ok().build();
     }
 
+    /**
+     * atualiza um usuário
+     * @param user
+     * @return respose
+     */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity update(@RequestBody User user){
         userRepository.save(user);
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * delete um usuário
+     * @param id
+     * @return response
+     */
     @RequestMapping(method = RequestMethod.DELETE)
     public ResponseEntity insert(@RequestParam("id") int id){
         userRepository.deleteById(id);
