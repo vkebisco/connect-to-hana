@@ -11,15 +11,15 @@ import javax.sql.DataSource;
 @Configuration
 public class HanaConfig {
 
-    //pega os valores do arquivo application.properties
+    //pega os valores das variáveis de ambiente do sistema
 
-    @Value("${database.url}")
+    @Value("${DBURL}")
     private String url;
 
-    @Value("${database.username}")
+    @Value("${DBUSERNAME}")
     private String username;
 
-    @Value("${database.password}")
+    @Value("${DBPASSWORD}")
     private String password;
 
     //configura o user, senha e url do HANA
