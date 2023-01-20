@@ -66,13 +66,7 @@ public class Queries {
     }
 
     /**
-     * inserer um User no HANA
-     * <p>
-     * !!!IMPORTANTE!!!
-     * Ao executar um SQL com parâmetros, sempre usar o PreparedStatement e setar
-     * os parâmetros programaticamente, para se proteger contra ataques de SQL Injection
-     * para mais informações, ver:
-     * https://www.w3schools.com/sql/sql_injection.asp
+     * Faz um update de um User no HANA
      * @param user
      * @return o numero de linhas alteradas
      * @throws SQLException
@@ -93,13 +87,7 @@ public class Queries {
     }
 
     /**
-     * inserer um User no HANA
-     * <p>
-     * !!!IMPORTANTE!!!
-     * Ao executar um SQL com parâmetros, sempre usar o PreparedStatement e setar
-     * os parâmetros programaticamente, para se proteger contra ataques de SQL Injection
-     * para mais informações, ver:
-     * https://www.w3schools.com/sql/sql_injection.asp
+     * Deleta um User no HANA
      * @param id
      * @return numero de linhas alteradas
      * @throws SQLException

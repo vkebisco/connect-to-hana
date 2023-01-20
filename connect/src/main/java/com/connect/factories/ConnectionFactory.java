@@ -25,8 +25,12 @@ public class ConnectionFactory {
 
             //!!!IMPORTANTE
             // é boa prática colocar dados sensiveis em um arquivo .env do que escrever diretamente no código
-            conn = DriverManager
-                    .getConnection(envVariables.get(2), envVariables.get(1), envVariables.get(0));
+
+            String senha = envVariables.get(0);
+            String username = envVariables.get(1);
+            String url = envVariables.get(2);
+
+            conn = DriverManager.getConnection(url, username,senha);
 
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);

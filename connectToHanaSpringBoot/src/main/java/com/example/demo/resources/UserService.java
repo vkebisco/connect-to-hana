@@ -4,6 +4,8 @@ import com.example.demo.domain.User;
 import com.example.demo.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +30,11 @@ public class UserService {
         if (!Objects.equals(key, apiKey)){
             return unauthorized();
         }
-        return ResponseEntity.ok(userRepository.findAll());
+
+        //pega todos os users
+        var findAll = userRepository.findAll();
+
+        return ResponseEntity.ok(findAll);
     }
 
     /**
@@ -41,8 +47,11 @@ public class UserService {
         if (!Objects.equals(key, apiKey)){
             return unauthorized();
         }
-       userRepository.save(user);
-       return ResponseEntity.ok().build();
+
+        //insere user (se não possuir campo ID)
+        userRepository.save(user);
+
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -55,7 +64,10 @@ public class UserService {
         if (!Objects.equals(key, apiKey)){
             return unauthorized();
         }
+
+        //faz update do user (se possuir campo ID)
         userRepository.save(user);
+
         return ResponseEntity.ok().build();
     }
 
@@ -69,11 +81,21 @@ public class UserService {
         if (!Objects.equals(key, apiKey)){
             return unauthorized();
         }
-        userRepository.deleteById(id);
+
+        //deleta user por ID
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return ResponseEntity.status(400)
+                    .contentType(MediaType.APPLICATION_JSON).body("{\"mensagem\": \"id inexistente\"}");
+        }
+
         return ResponseEntity.ok().build();
     }
 
     private ResponseEntity unauthorized(){
         return ResponseEntity.status(401).build();
     }
+
+
 }
